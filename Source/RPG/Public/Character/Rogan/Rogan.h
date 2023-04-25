@@ -3,8 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InputActionValue.h"
 #include "GameFramework/Character.h"
+#include "InputActionValue.h"
 #include "Rogan.generated.h"
+
+class UInputAction;
+class UInputMappingContext;
+class UCameraComponent;
+class USpringArmComponent;
 
 UCLASS()
 class RPG_API ARogan : public ACharacter
@@ -12,18 +19,36 @@ class RPG_API ARogan : public ACharacter
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
 	ARogan();
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+protected:
+	virtual void BeginPlay() override;
+	
+	void Move(const FInputActionValue& Value);
+	void Look(const FInputActionValue& Value);
+	
+private:
+	UPROPERTY(EditAnywhere)
+	USpringArmComponent* CameraBoom;
+
+	UPROPERTY(EditAnywhere)
+	UCameraComponent* Camera;
+
+	/**
+	 * Input
+	 */
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputMappingContext* InputContext;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* MovementAction;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* LookAction;
+	
 };
