@@ -30,6 +30,7 @@ protected:
 	
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
+	void Attack(const FInputActionValue& Value);
 	
 private:
 	UPROPERTY(EditAnywhere)
@@ -50,5 +51,8 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Input")
 	UInputAction* LookAction;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* AttackAction;
 	
 };

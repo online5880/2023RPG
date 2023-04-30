@@ -58,9 +58,9 @@ void ARogan::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	{
 		EnhancedInputComponent->BindAction(MovementAction,ETriggerEvent::Triggered,this,&ARogan::Move);
 		EnhancedInputComponent->BindAction(LookAction,ETriggerEvent::Triggered,this,&ARogan::Look);
+		EnhancedInputComponent->BindAction(AttackAction,ETriggerEvent::Completed,this,&ARogan::Attack);
 	}
 }
-
 
 void ARogan::Move(const FInputActionValue& Value)
 {
@@ -84,5 +84,10 @@ void ARogan::Look(const FInputActionValue& Value)
 
 	AddControllerPitchInput(LookAxisVector.Y);
 	AddControllerYawInput(LookAxisVector.X);
+}
+
+void ARogan::Attack(const FInputActionValue& Value)
+{
+	UE_LOG(LogTemp,Warning,TEXT("attack"));
 }
 
